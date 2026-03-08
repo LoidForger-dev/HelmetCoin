@@ -1,1 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$HELMET • tactical crypto army</title>
+  <meta name="description" content="Join the $HELMET Army – a disciplined, strategic movement built on coordination and resilience. Military‑grade tokenomics, community first.">
+  <meta name="keywords" content="HELMET, crypto, solana, meme coin, army, tactical, defi">
+  <meta name="author" content="HELMET command">
+  <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%231F3A2D' stroke='%23D6A94C' stroke-width='4'/%3E%3Cpath d='M30 40 L70 40 L65 65 Q50 75 35 65 Z' fill='%237CFFB2' opacity='0.8'/%3E%3C/svg%3E">
 
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    /* ----- RESET & VARIABLES ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg-dark: #1F3A2D;
+      --bg-secondary: #2F5B45;
+      --accent-neon: #7CFFB2;
+      --gold: #D6A94C;
+      --gold-soft: #F2C879;
+      --card-bg: #2A4D3C;
+      --text-primary: #EAF7EF;
+      --text-secondary: #B7D1C3;
+      --glass-bg: rgba(40, 80, 60, 0.6);
+      --border-light: rgba(255, 255, 255, 0.08);
+      --font-head: 'Oxanium', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --grid-size: 40px;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        linear-gradient(var(--bg-secondary) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-secondary) 1px, transparent 1px);
+      background-size: var(--grid-size) var(--grid-size);
+      background-position: center center;
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      line-height: 1.5;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* tactical radar glow overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 30% 40%, rgba(124,255,178,0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* floating particles canvas */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ----- GLASS CARDS ----- */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 24px;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s;
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 25px 45px -10px rgba(124,255,178,0.3);
+      transform: translateY(-6px) scale(1.01);
+    }
+
+    /* ----- BUTTONS ----- */
+    .btn-gold {
+      background: linear-gradient(180deg, #F2C879, #D6A94C);
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 2.2rem;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #1F3A2D;
+      box-shadow: 0 0 20px rgba(242,200,121,0.4);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .btn-gold:hover {
+      box-shadow: 0 0 30px rgba(242,200,121,0.8);
+      background: linear-gradient(180deg, #ffda8c, #e6b84c);
+      transform: scale(1.02);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      border-radius: 40px;
+      padding: 0.6rem 1.5rem;
+      font-weight: 500;
+      color: var(--gold-soft);
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-outline:hover {
+      background: rgba(214,169,76,0.15);
+      border-color: var(--gold-soft);
+      color: var(--accent-neon);
+    }
+
+    /* ----- TYPOGRAPHY ----- */
+    h1, h2, h3, h4 {
+      font-family: var(--font-head);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-neon), var(--gold));
+      border-radius: 4px;
+    }
+
+    /* ----- LOGO (circle + pulse) ----- */
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .logo-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 3px solid var(--gold);
+      box-shadow: 0 0 30px rgba(124,255,178,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      animation: pulse-glow 2.5s infinite ease-in-out;
+      transition: transform 0.3s, border-color 0.2s;
+    }
+    .logo-circle:hover {
+      transform: scale(1.08) rotate(2deg);
+      border-color: var(--accent-neon);
+      box-shadow: 0 0 50px #7CFFB2;
+    }
+    .logo-circle img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px #D6A94C);
+    }
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 20px rgba(124,255,178,0.3); }
+      50% { box-shadow: 0 0 45px rgba(124,255,178,0.8); }
+      100% { box-shadow: 0 0 20px rgba(124,255,178,0.3); }
+    }
+
+    /* roadmap grid */
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+      margin-top: 2rem;
+    }
+
+    .phase-card {
+      background: rgba(42,77,60,0.7);
+      backdrop-filter: blur(8px);
+      padding: 1.8rem 1.5rem;
+      border-radius: 20px;
+      border-left: 4px solid var(--gold);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .phase-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px -10px rgba(124,255,178,0.3);
+      border-left-color: var(--accent-neon);
+    }
+    .phase-card h3 { color: var(--gold-soft); margin-bottom: 0.8rem; }
+    .phase-card ul { list-style: none; }
+    .phase-card li { margin-bottom: 0.5rem; font-size: 0.95rem; display: flex; align-items: flex-start; gap: 0.5rem; }
+    .phase-card li i { color: var(--accent-neon); font-size: 0.8rem; margin-top: 0.2rem; }
+
+    /* tokenomics pill */
+    .token-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .token-item {
+      flex: 1 1 200px;
+      background: rgba(31,58,45,0.6);
+      border-radius: 20px;
+      padding: 1.2rem;
+      border: 1px solid var(--gold);
+      transition: all 0.3s;
+    }
+    .token-item:hover {
+      border-color: var(--accent-neon);
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(124,255,178,0.3);
+    }
+    .token-item .label { font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+    .token-item .value { font-size: 2.2rem; font-family: var(--font-head); color: var(--accent-neon); line-height: 1; }
+    .token-item .desc { font-size: 0.9rem; color: var(--gold-soft); margin-top: 0.4rem; }
+
+    /* pie chart container */
+    .chart-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      margin: 3rem 0;
+    }
+    .pie-wrapper {
+      position: relative;
+      width: 260px;
+      height: 260px;
+    }
+    #pieCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 0 15px rgba(124,255,178,0.4));
+      transition: transform 0.3s;
+    }
+    #pieCanvas:hover {
+      transform: scale(1.02);
+    }
+    .pie-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+    }
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+
+    /* live chart iframe */
+    .chart-iframe {
+      width: 100%;
+      height: 460px;
+      border: 2px solid var(--gold);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(124,255,178,0.3);
+      margin: 2rem 0;
+      transition: box-shadow 0.3s;
+    }
+    .chart-iframe:hover {
+      box-shadow: 0 0 45px rgba(124,255,178,0.6);
+    }
+    .chart-iframe iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* contract box */
+    .contract-box {
+      background: rgba(0,0,0,0.3);
+      border-radius: 60px;
+      padding: 0.6rem 1rem 0.6rem 1.8rem;
+      border: 1px solid var(--gold);
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .contract-address {
+      font-family: monospace;
+      font-size: 1.1rem;
+      color: var(--accent-neon);
+      word-break: break-all;
+    }
+    .copy-btn {
+      background: var(--card-bg);
+      border: none;
+      color: var(--gold);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: 0.2s;
+      border: 1px solid var(--gold);
+    }
+    .copy-btn:hover { background: var(--gold); color: #1F3A2D; }
+
+    /* community icons */
+    .social-links {
+      display: flex;
+      gap: 1.8rem;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+    .social-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--gold-soft);
+      transition: 0.3s;
+      text-decoration: none;
+    }
+    .social-icon:hover {
+      border-color: var(--accent-neon);
+      color: var(--accent-neon);
+      transform: scale(1.15) rotate(5deg);
+      box-shadow: 0 0 30px var(--accent-neon);
+    }
+
+    /* chatbot */
+    .chat-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 999;
+    }
+    #chat-circle {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(145deg, #2F5B45, #1F3A2D);
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      color: var(--accent-neon);
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(124,255,178,0.5);
+      transition: 0.2s;
+      animation: pulse-glow 2s infinite;
+    }
+    #chat-circle:hover { transform: scale(1.1); border-color: var(--accent-neon); }
+
+    .chat-box {
+      position: fixed;
+      bottom: 110px;
+      right: 30px;
+      width: 340px;
+      max-width: 85vw;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 2px solid var(--gold);
+      border-radius: 30px;
+      padding: 1.2rem;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+      box-shadow: 0 20px 40px black;
+    }
+    .chat-box.show { display: flex; }
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--gold-soft);
+      padding-bottom: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .chat-close {
+      cursor: pointer;
+      font-size: 1.4rem;
+      color: var(--gold);
+    }
+    .chat-messages {
+      min-height: 200px;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .message {
+      padding: 0.6rem 1rem;
+      border-radius: 20px;
+      max-width: 85%;
+      word-wrap: break-word;
+    }
+    .bot-message {
+      background: #2A4D3C;
+      border-left: 4px solid var(--accent-neon);
+      align-self: flex-start;
+      color: var(--text-primary);
+    }
+    .user-message {
+      background: var(--bg-secondary);
+      border-right: 4px solid var(--gold);
+      align-self: flex-end;
+    }
+    .chat-input-area {
+      display: flex;
+      gap: 0.4rem;
+    }
+    #chatInput {
+      flex: 1;
+      background: #1F3A2D;
+      border: 1px solid var(--gold);
+      border-radius: 40px;
+      padding: 0.7rem 1rem;
+      color: white;
+      outline: none;
+    }
+    #chatInput::placeholder { color: #B7D1C3; }
+    #sendMsg {
+      background: var(--gold);
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      color: #1F3A2D;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* scroll animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    hr {
+      border: 0.5px solid rgba(214,169,76,0.3);
+      margin: 2rem 0;
+    }
+    .ca-section {
+      text-align: center;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating particles canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="container">
+    <!-- HERO -->
+    <section style="text-align: center; padding: 2rem 0 1rem;" class="fade-up">
+      <div class="logo-container">
+        <div class="logo-circle">
+          <img src="helmet.png" alt="$HELMET logo" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'45\' fill=\'%232A4D3C\' stroke=\'%23D6A94C\' stroke-width=\'4\'/%3E%3Cpath d=\'M30 40 L70 40 L65 65 Q50 75 35 65 Z\' fill=\'%237CFFB2\' opacity=\'0.9\'/%3E%3C/svg%3E';">
+        </div>
+      </div>
+      <h1 style="font-size: 4rem; font-weight: 800; letter-spacing: 5px; text-shadow: 0 0 15px #7CFFB2;">$HELMET</h1>
+      <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 2.2rem 0;">
+        <a href="https://moonshot.com/8NL9YXv4m7TBdkttC6jRZrvVnm9EUEc8RkfRNNyxmoon?ref=oDor2r" target="_blank" class="btn-gold"><i class="fas fa-rocket"></i> BUY TOKEN</a>
+        <a href="#live-chart" class="btn-outline"><i class="fas fa-chart-line"></i> LIVE CHART</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="glass-card fade-up" style="padding: 2.5rem; margin: 3rem 0;">
+      <h2>⚔️ ABOUT $HELMET</h2>
+      <p style="font-size: 1.2rem; line-height: 1.7; color: var(--text-secondary);">In the ever-changing battlefield of crypto, only the disciplined survive. $HELMET Army is built for those who move with strategy, unity, and purpose.</p>
+      <p style="margin-top: 1rem;">What began as a simple meme has evolved into something stronger — a community driven by coordination, resilience, and a shared long-term vision. Here, every holder is a cadet, every move is tactical, and every step forward is made together. The helmet is more than armor. It represents discipline, strategy, and the courage to navigate the unpredictable world of decentralized finance. This isn’t just another token. It’s a coordinated movement. Welcome to the $HELMET Army. Enlist, strategize, and ride the mission forward. 🚀🐕‍🪖</p>
+    </section>
+
+    <!-- ROADMAP -->
+    <section style="margin: 5rem 0;" class="fade-up">
+      <h2>🪖 ROADMAP</h2>
+      <div class="roadmap-grid">
+        <div class="phase-card"><h3><i class="fas fa-bullhorn" style="color: var(--gold);"></i> Phase 1 — Mobilization</h3><ul><li><i class="fas fa-check-circle"></i> Smart contract & token launch</li><li><i class="fas fa-check-circle"></i> Official website & communities</li><li><i class="fas fa-check-circle"></i> Initial marketing & listings</li><li><i class="fas fa-check-circle"></i> Early supporter growth</li></ul></div>
+        <div class="phase-card"><h3><i class="fas fa-campground"></i> Phase 2 — Establish Base</h3><ul><li><i class="fas fa-check-circle"></i> Strategic partnerships</li><li><i class="fas fa-check-circle"></i> Expanded marketing campaigns</li><li><i class="fas fa-check-circle"></i> Community events & stability</li><li><i class="fas fa-check-circle"></i> Liquidity growth</li></ul></div>
+        <div class="phase-card"><h3><i class="fas fa-microchip"></i> Phase 3 — Tactical Deployment</h3><ul><li><i class="fas fa-check-circle"></i> Staking platform launch</li><li><i class="fas fa-check-circle"></i> Governance initiatives</li><li><i class="fas fa-check-circle"></i> New utilities & tools</li><li><i class="fas fa-check-circle"></i> Web3 partnerships</li></ul></div>
+        <div class="phase-card"><h3><i class="fas fa-globe"></i> Phase 4 — Global Influence</h3><ul><li><i class="fas fa-check-circle"></i> Major CEX listings</li><li><i class="fas fa-check-circle"></i> Global brand expansion</li><li><i class="fas fa-check-circle"></i> Ecosystem integrations</li><li><i class="fas fa-check-circle"></i> Community-led growth</li></ul></div>
+      </div>
+    </section>
+
+    <!-- TOKENOMICS + PIE CHART + LIVE CHART -->
+    <section id="tokenomics" style="margin: 5rem 0;" class="fade-up">
+      <h2>📊 TOKENOMICS</h2>
+      <p style="font-size: 1.3rem; margin-bottom: 0.2rem;">Total Supply: <span style="color: var(--accent-neon); font-family: var(--font-head);">1,000,000,000 $HELMET</span></p>
+      <p style="color: var(--text-secondary); margin-bottom: 2rem;">Built for the army. Designed for the mission.</p>
+      <div class="token-row">
+        <div class="token-item"><span class="label">🪖 Community Rewards</span><div class="value">40%</div><div class="desc">incentives & campaigns</div></div>
+        <div class="token-item"><span class="label">💧 Liquidity</span><div class="value">35%</div><div class="desc">stable trading</div></div>
+        <div class="token-item"><span class="label">🚀 Marketing & Growth</span><div class="value">15%</div><div class="desc">expansion</div></div>
+        <div class="token-item"><span class="label">⚙️ Development</span><div class="value">7%</div><div class="desc">ecosystem upgrades</div></div>
+        <div class="token-item"><span class="label">🎁 Strategic Airdrops</span><div class="value">3%</div><div class="desc">early supporters</div></div>
+      </div>
+
+      <!-- Animated pie chart + legend -->
+      <div class="chart-container">
+        <div class="pie-wrapper">
+          <canvas id="pieCanvas" width="260" height="260"></canvas>
+        </div>
+        <div class="pie-legend">
+          <div class="legend-item"><span class="legend-color" style="background: #7CFFB2;"></span> Community Rewards 40%</div>
+          <div class="legend-item"><span class="legend-color" style="background: #D6A94C;"></span> Liquidity 35%</div>
+          <div class="legend-item"><span class="legend-color" style="background: #F2C879;"></span> Marketing 15%</div>
+          <div class="legend-item"><span class="legend-color" style="background: #2F5B45;"></span> Development 7%</div>
+          <div class="legend-item"><span class="legend-color" style="background: #B7D1C3;"></span> Airdrops 3%</div>
+        </div>
+      </div>
+
+      <!-- Live DexScreener chart embed -->
+      <div id="live-chart" style="margin-top: 3rem;">
+        <h3 style="font-family: var(--font-head); margin-bottom: 1rem;">⚡ LIVE CHART (DEXSCREENER)</h3>
+        <div class="chart-iframe">
+          <iframe src="https://dexscreener.com/solana/6UcQ13UaWvVe6yXCJGVxNWhVbVhmfCvi5kG44oJezRGE?embed=1&theme=dark&info=0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY LINKS (JOIN $HELMET ARMY) -->
+    <section style="text-align: center; margin: 5rem 0; padding: 2rem; background: rgba(42,77,60,0.3); border-radius: 50px;" class="fade-up">
+      <h2 style="text-align: center;">JOIN $HELMET ARMY</h2>
+      <div class="social-links">
+        <!-- old twitter bird icon -->
+        <a href="https://x.com/helmettothemoon?s=21" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="https://t.me/+eb8Of9oNCpE0ZTU8" target="_blank" class="social-icon"><i class="fab fa-telegram-plane"></i></a>
+      </div>
+      <p style="color: var(--text-secondary);">Tactical updates · community drills · mission control</p>
+    </section>
+
+    <!-- CONTRACT ADDRESS + CTA -->
+    <section class="ca-section fade-up">
+      <h2>⚡ CONTRACT (CA)</h2>
+      <div class="contract-box" id="contractWrapper">
+        <span class="contract-address" id="caText">8NL9YXv4m7TBdkttC6jRZrvVnm9EUEc8RkfRNNyxmoon</span>
+        <button class="copy-btn" id="copyCaBtn"><i class="far fa-copy"></i> COPY</button>
+      </div>
+      <p style="margin: 1.5rem 0;">1 Billion Supply. One Mission. One Army.</p>
+      <a href="https://moonshot.com/8NL9YXv4m7TBdkttC6jRZrvVnm9EUEc8RkfRNNyxmoon?ref=oDor2r" target="_blank" class="btn-gold"><i class="fas fa-helmet-safety"></i> ENLIST NOW — BUY $HELMET</a>
+    </section>
+
+    <hr>
+    <div style="text-align: center; opacity: 0.6; font-size: 0.9rem;">© $HELMET ARMY 2026 · STRATEGIC RESERVE</div>
+  </div>
+
+  <!-- AI CHATBOT TOGGLE -->
+  <div class="chat-toggle">
+    <div id="chat-circle"><i class="fas fa-robot"></i></div>
+    <div class="chat-box" id="chatBox">
+      <div class="chat-header">
+        <span style="font-family: var(--font-head);"><i class="fas fa-head-side-brain" style="color: var(--accent-neon);"></i> HELMET AI</span>
+        <span class="chat-close" id="chatClose">&times;</span>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">🪖 Welcome cadet. Ask me anything about $HELMET: roadmap, tokenomics, community...</div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Type your message...">
+        <button id="sendMsg"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ----- BOT KNOWLEDGE BASE (unchanged) -----
+      const botKnowledge = {
+        about: `$HELMET is a military‑themed crypto community on Solana. It represents discipline, strategy, and coordinated movement. Total supply 1B.`,
+        roadmap: `Phase1: Mobilization (launch, website, community). Phase2: Establish Base (partnerships, events). Phase3: Tactical (staking, governance). Phase4: Global (CEX, brand expansion).`,
+        tokenomics: `Total supply 1,000,000,000. Community 40% · Liquidity 35% · Marketing 15% · Development 7% · Airdrops 3%.`,
+        community: `Join the Army on X (Twitter) @helmettothemoon and Telegram t.me/+eb8Of9oNCpE0ZTU8`,
+        contract: `CA: 8NL9YXv4m7TBdkttC6jRZrvVnm9EUEc8RkfRNNyxmoon`,
+        buy: `You can buy $HELMET on Moonshot (link in hero) or use the DexScreener chart.`,
+        utility: `Future utilities include staking, governance, and exclusive tools for holders.`
+      };
+
+      // Chat elements
+      const circle = document.getElementById('chat-circle');
+      const box = document.getElementById('chatBox');
+      const closeBtn = document.getElementById('chatClose');
+      const sendBtn = document.getElementById('sendMsg');
+      const input = document.getElementById('chatInput');
+      const messagesDiv = document.getElementById('chatMessages');
+
+      circle.addEventListener('click', () => box.classList.toggle('show'));
+      closeBtn.addEventListener('click', () => box.classList.remove('show'));
+
+      function addUserMessage(text) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'message user-message';
+        msgDiv.innerText = text;
+        messagesDiv.appendChild(msgDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+      function addBotMessage(text) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'message bot-message';
+        msgDiv.innerText = text;
+        messagesDiv.appendChild(msgDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+      function getBotReply(question) {
+        const q = question.toLowerCase();
+        if (q.includes('roadmap') || q.includes('phase')) return botKnowledge.roadmap;
+        if (q.includes('tokenomic') || q.includes('supply') || q.includes('percent')) return botKnowledge.tokenomics;
+        if (q.includes('community') || q.includes('army') || q.includes('join')) return botKnowledge.community;
+        if (q.includes('contract') || q.includes('ca') || q.includes('address')) return botKnowledge.contract;
+        if (q.includes('buy') || q.includes('purchase') || q.includes('chart')) return botKnowledge.buy;
+        if (q.includes('utility') || q.includes('staking') || q.includes('governance')) return botKnowledge.utility;
+        if (q.includes('about') || q.includes('what is')) return botKnowledge.about;
+        return "Discipline and strategy define us. For specific details, check the roadmap or ask another way, soldier.";
+      }
+      sendBtn.addEventListener('click', () => {
+        const text = input.value.trim();
+        if (text === '') return;
+        addUserMessage(text);
+        input.value = '';
+        setTimeout(() => addBotMessage(getBotReply(text)), 300);
+      });
+      input.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendBtn.click(); });
+
+      // Copy contract
+      const copyBtn = document.getElementById('copyCaBtn');
+      const caText = document.getElementById('caText').innerText;
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(caText);
+          copyBtn.innerHTML = '<i class="fas fa-check"></i> COPIED!';
+          setTimeout(() => { copyBtn.innerHTML = '<i class="far fa-copy"></i> COPY'; }, 2000);
+        } catch { alert('Press Ctrl+C to copy'); }
+      });
+
+      // ---------- PIE CHART (animated) ----------
+      const canvas = document.getElementById('pieCanvas');
+      const ctx = canvas.getContext('2d');
+      const data = [40, 35, 15, 7, 3];
+      const colors = ['#7CFFB2', '#D6A94C', '#F2C879', '#2F5B45', '#B7D1C3'];
+      const labels = ['Community', 'Liquidity', 'Marketing', 'Development', 'Airdrops'];
+      let currentPercent = 0;
+      const total = data.reduce((a, b) => a + b, 0);
+      let angles = [];
+      let endAngles = [];
+
+      function computeEndAngles() {
+        let cum = 0;
+        return data.map(val => {
+          cum += val / total * 2 * Math.PI;
+          return cum;
+        });
+      }
+      endAngles = computeEndAngles();
+
+      function drawPie(progress) {
+        ctx.clearRect(0, 0, 260, 260);
+        let start = 0;
+        for (let i = 0; i < data.length; i++) {
+          let sliceEnd = start + (data[i] / total) * 2 * Math.PI * progress;
+          ctx.beginPath();
+          ctx.moveTo(130, 130);
+          ctx.arc(130, 130, 110, start, sliceEnd);
+          ctx.closePath();
+          ctx.fillStyle = colors[i];
+          ctx.fill();
+          // draw white separator
+          ctx.strokeStyle = '#1F3A2D';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(130, 130);
+          ctx.arc(130, 130, 110, start, sliceEnd);
+          ctx.lineTo(130, 130);
+          ctx.stroke();
+          start = sliceEnd;
+        }
+        // inner circle (military style)
+        ctx.beginPath();
+        ctx.arc(130, 130, 50, 0, 2 * Math.PI);
+        ctx.fillStyle = '#1F3A2D';
+        ctx.fill();
+        ctx.strokeStyle = '#D6A94C';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      // animate pie on visible
+      let animated = false;
+      function animatePie() {
+        if (animated) return;
+        animated = true;
+        let startTime = null;
+        const duration = 1500; // ms
+        function step(ts) {
+          if (!startTime) startTime = ts;
+          const elapsed = ts - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          drawPie(progress);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      // Intersection Observer for fade-up and pie animation
+      const faders = document.querySelectorAll('.fade-up');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // if this is the tokenomics section, trigger pie chart
+            if (entry.target.id === 'tokenomics' && !animated) {
+              animatePie();
+            }
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+      faders.forEach(el => observer.observe(el));
+
+      // also observe the canvas separately if needed
+      observer.observe(document.querySelector('#tokenomics'));
+
+      // ---------- FLOATING PARTICLES (military style) ----------
+      const particleCanvas = document.getElementById('particle-canvas');
+      const pCtx = particleCanvas.getContext('2d');
+      let width, height;
+      let particles = [];
+
+      function initParticles() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        particleCanvas.width = width;
+        particleCanvas.height = height;
+        particles = [];
+        const particleCount = 70;
+        for (let i = 0; i < particleCount; i++) {
+          particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 2 + 0.5,
+            speedX: (Math.random() - 0.5) * 0.2,
+            speedY: (Math.random() - 0.5) * 0.1,
+            color: `rgba(124, 255, 178, ${Math.random() * 0.3 + 0.2})`
+          });
+        }
+      }
+
+      function drawParticles() {
+        pCtx.clearRect(0, 0, width, height);
+        pCtx.fillStyle = '#7CFFB2';
+        particles.forEach(p => {
+          pCtx.beginPath();
+          pCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          pCtx.fillStyle = p.color;
+          pCtx.fill();
+          // move
+          p.x += p.speedX;
+          p.y += p.speedY;
+          // wrap around edges
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+        });
+        requestAnimationFrame(drawParticles);
+      }
+
+      window.addEventListener('resize', () => {
+        initParticles();
+      });
+      initParticles();
+      drawParticles();
+
+    })();
+  </script>
+</body>
+  </html>
