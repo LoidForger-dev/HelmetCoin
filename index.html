@@ -41,12 +41,9 @@
     }
 
     body {
-      background-color: var(--bg-dark);
-      background-image: 
-        linear-gradient(var(--bg-secondary) 1px, transparent 1px),
-        linear-gradient(90deg, var(--bg-secondary) 1px, transparent 1px);
-      background-size: var(--grid-size) var(--grid-size);
-      background-position: center center;
+      /* military background image */
+      background: url('military.png') no-repeat center center fixed;
+      background-size: cover;
       font-family: var(--font-body);
       color: var(--text-primary);
       line-height: 1.5;
@@ -54,12 +51,25 @@
       overflow-x: hidden;
     }
 
-    /* tactical radar glow overlay */
+    /* semi‑transparent tactical grid overlay */
     body::before {
       content: '';
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at 30% 40%, rgba(124,255,178,0.08) 0%, transparent 50%);
+      background-image: 
+        linear-gradient(rgba(47,91,69,0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47,91,69,0.25) 1px, transparent 1px);
+      background-size: var(--grid-size) var(--grid-size);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* soft radial glow overlay (also semi‑transparent) */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 30% 40%, rgba(124,255,178,0.1) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
@@ -194,9 +204,10 @@
       box-shadow: 0 0 50px #7CFFB2;
     }
     .logo-circle img {
-      width: 90%;
-      height: 90%;
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;          /* fills the circle completely */
+      border-radius: 50%;          /* ensures image itself is circular */
       filter: drop-shadow(0 0 6px #D6A94C);
     }
     @keyframes pulse-glow {
@@ -602,7 +613,7 @@
     </section>
 
     <hr>
-    <div style="text-align: center; opacity: 0.6; font-size: 0.9rem;">© $HELMET ARMY 2026 · STRATEGIC RESERVE</div>
+    <div style="text-align: center; opacity: 0.6; font-size: 0.9rem;">© $HELMET ARMY · STRATEGIC RESERVE</div>
   </div>
 
   <!-- AI CHATBOT TOGGLE -->
@@ -832,4 +843,4 @@
     })();
   </script>
 </body>
-  </html>
+</html>
